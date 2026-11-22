@@ -50,8 +50,8 @@
   var done = false;
   function hide(){ if (done) return; done = true; setTimeout(function(){ L.classList.add('out'); }, 350); }
   f.addEventListener('load', hide);
-  setTimeout(function(){ if (!done) document.getElementById('hint').hidden = false; }, 12000);
-  setTimeout(hide, 25000);
+  setTimeout(function(){ if (!done) document.getElementById('hint').hidden = false; }, 6000);
+  setTimeout(hide, 9000);   /* หน้าเว็บจริงมีหน้าโหลดของตัวเองอยู่แล้ว */
 </script>
 </body>
 </html>
