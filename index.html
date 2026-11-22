@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PERFORMANCE REPORT - CI</title>
+<meta name="description" content="PERFORMANCE REPORT - CI · รายงานผลการดำเนินงานประจำเดือน Coil Center / Pipe">
+<meta name="theme-color" content="#0B1226">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PERFORMANCE">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#0B1226}
+  body{height:100vh;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);box-sizing:border-box}
+  #app{display:block;width:100%;height:100%;border:0;margin:0;background:#0B1226}
+  #load{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    background:radial-gradient(70% 60% at 50% 40%,#1E2F55 0%,#0B1226 70%);color:#fff;
+    font-family:"IBM Plex Sans Thai","Sarabun","Noto Sans Thai",system-ui,sans-serif;transition:opacity .6s ease,visibility .6s}
+  #load.out{opacity:0;visibility:hidden}
+  #load .t{font-size:clamp(26px,6vw,44px);letter-spacing:.06em;font-weight:300;text-align:center;line-height:1.15}
+  #load .t b{font-weight:700;color:#FF5A5F}
+  #load .s{font-size:13px;letter-spacing:.3em;opacity:.6}
+  #load .ring{width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:#FF5A5F;animation:spin 1s linear infinite}
+  #load .hint{font-size:12.5px;opacity:.55;margin-top:6px;text-align:center;max-width:300px}
+  #load .hint a{color:#9CC3E6}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){#load .ring{animation:none}}
+</style>
+</head>
+<body>
+<div id="load" role="status" aria-live="polite">
+  <div class="ring" aria-hidden="true"></div>
+  <div class="t">PERFORMANCE <b>REPORT</b></div>
+  <div class="s">CI · กำลังโหลด…</div>
+  <div class="hint" id="hint" hidden>โหลดนานกว่าปกติ ถ้ายังไม่ขึ้น <a id="direct" target="_top">เปิดหน้าเว็บโดยตรง</a></div>
+</div>
+<iframe id="app" title="PERFORMANCE REPORT - CI" allow="fullscreen; clipboard-write" allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"></iframe>
+<script>
+  /* ลิงก์เว็บแอปจริง (Google Apps Script) */
+  var GAS = "https://script.google.com/macros/s/AKfycbwyfZjmofL5zH6Sc4CLkRn7_Fofa26EM3JVnEmBP3b_9zlbC86Ah7MfOUMOAURrvbq0/exec";
+  var f = document.getElementById('app'), L = document.getElementById('load');
+  document.getElementById('direct').href = GAS;
+  /* ส่งต่อ ?tab=..&m=.. ไปให้เว็บแอป (ถ้ามี) — Address bar ของหน้านี้ไม่เปลี่ยน */
+  f.src = GAS + (location.search || '');
+  var done = false;
+  function hide(){ if (done) return; done = true; setTimeout(function(){ L.classList.add('out'); }, 350); }
+  f.addEventListener('load', hide);
+  setTimeout(function(){ if (!done) document.getElementById('hint').hidden = false; }, 12000);
+  setTimeout(hide, 25000);
+</script>
+</body>
+</html>
